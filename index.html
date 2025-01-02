@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport"
+	  content="width=device-width, initial-scale=1.0">
+    <title>Control V4L2NDI</title>
+
+  <style type="text/css">
+    .formfield { 
+      margin-bottom: 2pt;
+    }
+  </style>
+  <script>
+      window.onload = function() {
+        history.replaceState("", "", "");
+      }
+  </script>
+
+  </head>
+
+  <body style="background-color:lightgray;">
+    <div style="text-align:center;">
+      <h3>V4L2NDI Control</h3>
+        !MSG!
+        <form action="" method="post">
+            <div class="formfield">
+                <br>
+                <input type="submit" name="Restart" value="Restart V4L2NDI Process">
+                <input type="submit" name="Reboot" value="Reboot Server">
+                <input type="submit" name="Shutdown" value="Shutdown Server">
+            </div>
+      </form>
+    </div>
+  </body>
+</html>
