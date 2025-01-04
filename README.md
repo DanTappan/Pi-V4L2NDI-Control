@@ -16,7 +16,7 @@ The default configuration of the program supports 1080p/30 when running on:
 
 ## Installation
 
-The install script creates a new systemctl service 'v4l2ndi' which will run at system startup. It operates by finding the first USB video device and running *v4l2ndi* to advertise and stream the device to NDI. 
+The install script creates a new systemctl service 'v4l2ndi' which will run at system startup. It operates by finding the first USB video device and running */usr/bin/v4l2ndi* to advertise and stream the device to NDI. 
 
 The install script also installs the [Newtek NDI SDK](https://ndi.video/for-developers/ndi-sdk/) and the [v4l2ndi](https://github.com/lplassman/V4L2-to-NDI) application
 
