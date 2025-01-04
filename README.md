@@ -25,7 +25,7 @@ The Quick Install procedure uses a pre-built (using pyinstaller) copy of the app
 ### Quick Install
 
 ```
-git clone https://github.com/DanTappan/Pi-V4L2NDI-Control; cd Pi-V42NDI-Control; bash ./install.sh
+git clone https://github.com/DanTappan/Pi-V4L2NDI-Control; cd Pi-V42LNDI-Control; bash ./install.sh
 ```
 
 
