@@ -18,7 +18,6 @@ import re
 import threading
 import subprocess
 from linuxpy.video.device import Device
-from typing import Optional
 import data_files
 
 if os.getuid() != 0:
@@ -41,7 +40,7 @@ def reboot (reboot_flag=True):
         flag = "-h"
 
     args = [
-             "x/usr/sbin/shutdown",
+             "/usr/sbin/shutdown",
              flag,
              "now"
     ]
@@ -92,7 +91,7 @@ def handle_form(form):
 
     if form.get("Restart"):
         v4l2ndi_kill()
-        body = webpage("Restarted V4L2NDI")
+        body = webpage("Restarting V4L2NDI")
 
     elif form.get("Reboot"):
         schedule(reboot)
@@ -111,7 +110,6 @@ def my_web_app(environ, start_response):
 
     if environ['REQUEST_METHOD'] == 'GET':
         body = webpage()
-
     elif multipart.is_form_request(environ):
         forms, files = multipart.parse_form_data(environ)
         body = handle_form(forms)
@@ -145,12 +143,12 @@ def find_device():
             return dev.filename
         num = num + 1
 
-v4l2ndi_popen: Optional[subprocess.Popen] = None
+v4l2ndi_terminate_process = False
 
 def v4l2ndi_kill():
-    with process_lock:
-        if v4l2ndi_popen is not None:
-            v4l2ndi_popen.terminate()
+    global v4l2ndi_terminate_process
+
+    v4l2ndi_terminate_process = True
 
 def run_v4l2ndi():
     while True:
@@ -174,23 +172,26 @@ def run_v4l2ndi():
 v4l2ndi_thread_exit = False
 
 def v4l2ndi_thread():
-    global v4l2ndi_popen, v4l2ndi_thread_exit
+    global v4l2ndi_terminate_process, v4l2ndi_thread_exit
 
     while True:
-        with process_lock:
-            popen = run_v4l2ndi()
-            v4l2ndi_popen = popen
+        v4l2ndi_terminate_process = False
+        popen = run_v4l2ndi()
 
         if popen is None:
             time.sleep(10)
         else:
             while popen.returncode is None:
                 try:
-                    popen.wait(10)
+                    popen.wait(2)
                 except (subprocess.TimeoutExpired, KeyboardInterrupt):
                     pass
                 finally:
-                     if v4l2ndi_thread_exit:
+                    if v4l2ndi_terminate_process:
+                        popen.terminate()
+                        v4l2ndi_terminate_process = False
+
+                    if v4l2ndi_thread_exit:
                         return
                 pass
         
@@ -203,5 +204,5 @@ if __name__ == '__main__' :
             httpd.serve_forever()
 
     except KeyboardInterrupt:
-        v4l2ndi_thread_exit = True
         v4l2ndi_kill()
+        v4l2ndi_thread_exit = True
