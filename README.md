@@ -4,7 +4,7 @@ A front-end to run [v4l2ndi](https://github.com/lplassman/V4L2-to-NDI)
 
 This is intended to be installed on a dedicated Raspberry Pi, or a similar arm64 SBC (e.g. an OrangePi running Armbian) which will be used to adapt a USB video device (a webcam, or a USB HDMI capture device connected to a camera) to NDI.
 
-Provides a simple web interface (http: on port 80) for minimal control of the system (restart, reboot, shutdown)
+Provides a simple web interface (http: on port 8000) for minimal control of the system (restart, reboot, shutdown)
 
 ## Hardware requirements
 
