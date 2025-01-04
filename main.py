@@ -12,6 +12,7 @@
 from wsgiref.simple_server import make_server
 import multipart
 import io
+import os
 import time
 import re
 import threading
@@ -19,7 +20,10 @@ import subprocess
 from linuxpy.video.device import Device
 import data_files
 
-listensocket = 8000
+if os.getuid() == 0:
+    listensocket = 80
+else:
+    listensocket = 8000
 
 v4l2ndi = "/usr/bin/v4l2ndi"
 
@@ -191,6 +195,7 @@ if __name__ == '__main__' :
     threading.Thread(target=v4l2ndi_thread).start()
 
     try:
+        print(f"webserver listening on port {listensocket}")
         with make_server('', listensocket, my_web_app) as httpd:
             httpd.serve_forever()
 
