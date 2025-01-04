@@ -11,7 +11,6 @@
 #
 from wsgiref.simple_server import make_server
 import multipart
-import os
 import io
 import time
 import re
@@ -20,17 +19,9 @@ import subprocess
 from linuxpy.video.device import Device
 import data_files
 
-if os.getuid() != 0:
-    listensocket = 8000
-else:
-    listensocket = 80
+listensocket = 8000
 
 v4l2ndi = "/usr/bin/v4l2ndi"
-
-#
-# Thread locking
-#   
-process_lock = threading.Lock()
 
 def reboot (reboot_flag=True):
     """ try to reboot the system """
@@ -200,7 +191,7 @@ if __name__ == '__main__' :
     threading.Thread(target=v4l2ndi_thread).start()
 
     try:
-        with make_server('', 8001, my_web_app) as httpd:
+        with make_server('', listensocket, my_web_app) as httpd:
             httpd.serve_forever()
 
     except KeyboardInterrupt:
