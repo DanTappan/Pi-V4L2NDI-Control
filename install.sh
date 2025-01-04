@@ -6,16 +6,18 @@
 # Prerequisites
 sudo apt update -y && sudo apt upgrade -y
 
+# Run lplassman script to install v4l2ndi
+(
 git clone https://github.com/lplassman/V4L2-to-NDI.git
-(cd V4L2-to-NDI
-
+cd V4L2-to-NDI
 sudo bash ./easy-install-rpi-aarch64.sh
 )
 
-if [ ! -d /etc/v4l2ndi ]; then
-    sudo mkdir /etc/v4l2ndi
-fi
-
+#
+# if you want to be appropriately paranoid, run pyinstaller on Pu-V42NDI-Control.spec
+# to make sure that the executable matches the sources before running this script
+#
+sudo mkdir -p /etc/v4l2ndi
 sudo cp dist/V4L2NDI-Control /etc/v4l2ndi
 sudo chmod +x /etc/v4l2ndi/V4L2NDI-Control
 
