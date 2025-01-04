@@ -3,7 +3,7 @@
 A front-end to run [v4l2ndi](https://github.com/lplassman/V4L2-to-NDI) on a single-board-computer, such as a Raspberry Pi, to connect USB or 
 HDMI cameras to a NDI based video system
 
-Provides a simple web interface for minimal control of the system (restart, reboot, shutdown)
+Provides a simple web interface (http: on port 80) for minimal control of the system (restart, reboot, shutdown)
 
 ## Installation
 
@@ -12,6 +12,8 @@ This is intended to be installed on a dedicated Raspberry Pi, or a similar arm64
 The Quick Install procedure uses a pre-built (using pyinstaller) copy of the application. Alternatively you can close the repository and build your own copy.
 
 The install script also installs the [Newtek NDI SDK](https://ndi.video/for-developers/ndi-sdk/) and the [v4l2ndi](https://github.com/lplassman/V4L2-to-NDI) application
+
+The install script creates a new systemctl service 'v4l2ndi' which will run at system startup. It operates by finding the first USB video device and running 'v4l2ndi' to advertise and stream the device to NDI. 
 
 ### Quick Install
 
