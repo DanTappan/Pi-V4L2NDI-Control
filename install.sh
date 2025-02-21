@@ -5,6 +5,7 @@
 
 # Prerequisites
 sudo apt update -y && sudo apt upgrade -y
+sudo apt-get install v4l-utils
 
 # Run lplassman script to install v4l2ndi
 (
