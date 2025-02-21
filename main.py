@@ -17,7 +17,6 @@ import time
 import re
 import threading
 import subprocess
-from linuxpy.video.device import Device
 import data_files
 
 if os.getuid() == 0:
@@ -25,7 +24,7 @@ if os.getuid() == 0:
 else:
     listensocket = 8000
 
-v4l2ndi = "/usr/bin/v4l2ndi"
+v4l2ndi = "/etc/v4l2ndi/run_v4l2ndi"
 
 def reboot (reboot_flag=True):
     """ try to reboot the system """
@@ -122,21 +121,6 @@ def my_web_app(environ, start_response):
 
 #
 #
-def find_device():
-    """ Find a USB Video device to forward
-        returns Device or None"""
-    num = 0
-    while True:
-        dev = Device.from_id(num)
-        try:
-            dev.open()
-        except FileNotFoundError:
-            return None
-        driver = dev.info.driver
-        dev.close()
-        if driver == "uvcvideo":
-            return dev.filename
-        num = num + 1
 
 v4l2ndi_terminate_process = False
 
@@ -147,16 +131,9 @@ def v4l2ndi_kill():
 
 def run_v4l2ndi():
     while True:
-        device = find_device()
-        if device is None:
-            time.sleep(10)
-            continue
 
-        # nice the process to a higher priority to get closer to
-        # realtime performance
         args = [
-                "/usr/bin/nice", "--19",
-                v4l2ndi, "-d", device, "-i", "-f"
+                v4l2ndi
         ]
         popen = subprocess.Popen(args)
         return popen
