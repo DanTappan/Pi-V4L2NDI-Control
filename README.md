@@ -1,6 +1,6 @@
 # V4L2NDI-Control
 
-A front-end to run [v4l2ndi](https://github.com/lplassman/V4L2-to-NDI)
+A front-end to run [V4L-to-NDI](https://github.com/lplassman/V4L2-to-NDI)
 
 This is intended to be installed on a dedicated Raspberry Pi, or a similar arm64 SBC (e.g. an OrangePi running Armbian) which will be used to adapt a USB video device (a webcam, or a USB HDMI capture device connected to a camera) to NDI.
 
@@ -14,6 +14,7 @@ The default configuration of the program supports 1080p/30 when running on:
 - Gigabit Ethernet
 - USB video device (webcam or HDMI capture) connected to USB 3.0
 
+Currently V4L-to-NDI does not support USB webcams that use MJPEG, the casmera must be able to output uncompressed video using YUYU or UYUY
 ## Installation
 
 The install script creates a new systemctl service 'v4l2ndi' which will run at system startup. It operates by finding the first USB video device and running */usr/bin/v4l2ndi* to advertise and stream the device to NDI. 

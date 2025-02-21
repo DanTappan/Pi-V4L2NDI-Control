@@ -1,0 +1,30 @@
+#! /usr/bin/env bash
+#
+# script to run v4l2ndi
+#
+[[ "`whoami`" != "root" ]] && echo "must run as sudo!" && exit 1
+
+LOG="/tmp/v4l2ndi.log"
+rm -f $LOG
+exec > $LOG 2>&1
+
+#
+# Loop forever
+while true; do
+    #
+    # Find the USB video device
+    #
+    DEV=""
+    for device in /dev/video*; do
+      v4l2-ctl -D -d $device 2>/dev/null | grep -q uvcvideo
+      [[ "$?" = "0" ]] && DEV="$device" && break
+    done
+
+    if [ "$DEV" != "" ]; then
+        echo device="$DEV"
+        nice --19 v4l2ndi -d $DEV -f
+    fi
+
+    # sleep and retry.
+    sleep 10
+done

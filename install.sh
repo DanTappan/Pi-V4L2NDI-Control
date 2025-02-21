@@ -21,6 +21,11 @@ sudo mkdir -p /etc/v4l2ndi
 sudo cp dist/V4L2NDI-Control /etc/v4l2ndi
 sudo chmod +x /etc/v4l2ndi/V4L2NDI-Control
 
+# install run script. This is a separate shell script to make it easier to change
+# parameters
+sudo cp run_v4l2ndi /etc/v4l2ndi
+sudo chmod +x /etc/v4l2ndi/run_v4l2ndi
+
 sudo cp v4l2ndi.service /etc/systemd/system
 sudo systemctl enable v4l2ndi
 sudo systemctl start v4l2ndi
