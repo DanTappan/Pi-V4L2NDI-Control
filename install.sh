@@ -9,6 +9,7 @@ sudo apt-get install v4l-utils
 
 # Run lplassman script to install v4l2ndi
 (
+sudo rm -f /usr/bin/v4l2ndi
 git clone https://github.com/lplassman/V4L2-to-NDI.git
 cd V4L2-to-NDI
 sudo bash ./easy-install-rpi-aarch64.sh
