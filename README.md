@@ -4,7 +4,9 @@ A front-end to run [V4L-to-NDI](https://github.com/lplassman/V4L2-to-NDI)
 
 This is intended to be installed on a dedicated Raspberry Pi, or a similar arm64 SBC (e.g. an OrangePi running Armbian) which will be used to adapt a USB video device (a webcam, or a USB HDMI capture device connected to a camera) to NDI.
 
-Provides a simple web interface (http: on port 8000) for minimal control of the system (restart, reboot, shutdown)
+Provides a simple web interface (http: on port 80) for minimal control of the system (restart, reboot, shutdown)
+
+In order to be able to perform privileged functions (nice, shutdown, bind to port 80, ...) the program expects to be run as root.
 
 ## Hardware requirements
 
@@ -21,7 +23,7 @@ The install script creates a new systemctl service 'v4l2ndi' which will run at s
 
 The install script also installs the [Newtek NDI SDK](https://ndi.video/for-developers/ndi-sdk/) and the [v4l2ndi](https://github.com/lplassman/V4L2-to-NDI) application
 
-The Quick Install procedure uses a pre-built (using pyinstaller) copy of the application. Alternatively you can clone the repository and build your own copy.
+The Quick Install procedure below uses a copy of the application from the repository, which was pre-built for ARM64 Debian based systems (e.g. Raspian, Armbian) using pyinstaller. Alternatively you can clone the repository and build your own copy prior to running the install script
 
 ### Quick Install
 
