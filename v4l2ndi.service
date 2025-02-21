@@ -4,7 +4,6 @@ After=network.target
 
 [Service]
 ExecStart=/etc/v4l2ndi/V4L2NDI-Control
-ExecReload=/usr/local/apache2/bin/httpd -k graceful
 Type=exec
 Restart=always
 
