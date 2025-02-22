@@ -16,7 +16,7 @@ The default configuration of the program supports 1080p/30 when running on:
 - Gigabit Ethernet
 - USB video device (webcam or HDMI capture) connected to USB 3.0
 
-Currently V4L-to-NDI does not support USB webcams that use MJPEG, the casmera must be able to output uncompressed video using YUYU or UYUY
+Currently V4L-to-NDI does not support USB webcams that use MJPEG, the casmera must be able to output uncompressed video using YUYV or UYVY
 ## Installation
 
 The install script creates a new systemctl service 'v4l2ndi' which will run at system startup. It operates by finding the first USB video device and running */usr/bin/v4l2ndi* to advertise and stream the device to NDI. 
