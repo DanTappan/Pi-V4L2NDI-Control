@@ -28,7 +28,7 @@ The Quick Install procedure below uses a copy of the application from the reposi
 ### Quick Install
 
 ```
-rm -rf Pi-V4L2NDI-Control; git clone https://github.com/DanTappan/Pi-V4L2NDI-Control; cd Pi-V4L2NDI-Control; bash ./install.sh
+sudo rm -rf Pi-V4L2NDI-Control; git clone https://github.com/DanTappan/Pi-V4L2NDI-Control; cd Pi-V4L2NDI-Control; bash ./install.sh
 ```
 
 
