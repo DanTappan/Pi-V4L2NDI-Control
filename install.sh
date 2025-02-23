@@ -1,7 +1,9 @@
 # /usr/bin/env bash
 #
 # Install v4l2ndi package on a Raspberry Pi
-#
+
+# In case we are updating: shut down the running version
+sudo systemctl stop v4l2ndi
 
 # Prerequisites
 sudo apt update -y && sudo apt upgrade -y
@@ -11,7 +13,7 @@ sudo apt-get install v4l-utils
 # for now, use my fork of the code
 (
 sudo rm -f /usr/bin/v4l2ndi
-git clone https://github.com/dantappan/V4L2-to-NDI.git
+git clone https://github.com/DanTappan/V4L2-to-NDI.git
 cd V4L2-to-NDI
 sudo bash ./easy-install-rpi-aarch64.sh
 )
