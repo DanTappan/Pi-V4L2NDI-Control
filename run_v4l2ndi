@@ -22,7 +22,8 @@ while true; do
 
     if [ "$DEV" != "" ]; then
         echo device="$DEV"
-        nice --19 v4l2ndi -d $DEV -f
+        # default to YUYV, 30fps, threaded mode
+        nice --19 v4l2ndi -d $DEV -f -i -n 30 -e 1
     fi
 
     # sleep and retry.
